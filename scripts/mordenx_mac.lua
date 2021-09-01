@@ -5,6 +5,10 @@
 -- fork by cyl0
 -- https://github.com/cyl0/mpv-osc-morden-x
 
+-- fork by xiaoleichen
+-- Use chars for icon from:
+-- https://zavoloklom.github.io/material-design-iconic-font/cheatsheet.html
+
 local assdraw = require 'mp.assdraw'
 local msg = require 'mp.msg'
 local opt = require 'mp.options'
@@ -1161,7 +1165,7 @@ function osc_init()
     -- prev
     ne = new_element('pl_prev', 'button')
 
-    ne.content = '\xEF\x8E\xB5'
+    ne.content = ''
     ne.enabled = (pl_pos > 1) or (loop ~= 'no')
     ne.eventresponder['mbtn_left_up'] =
         function ()
@@ -1173,7 +1177,7 @@ function osc_init()
     --next
     ne = new_element('pl_next', 'button')
 
-    ne.content = '\xEF\x8E\xB4'
+    ne.content = ''
     ne.enabled = (have_pl and (pl_pos < pl_count)) or (loop ~= 'no')
     ne.eventresponder['mbtn_left_up'] =
         function ()
@@ -1189,9 +1193,9 @@ function osc_init()
 
     ne.content = function ()
         if mp.get_property('pause') == 'yes' then
-            return ('\xEF\x8E\xAA')
+            return ('')
         else
-            return ('\xEF\x8E\xA7')
+            return ('')
         end
     end
     ne.eventresponder['mbtn_left_up'] =
@@ -1203,7 +1207,7 @@ function osc_init()
     ne = new_element('skipback', 'button')
 
     ne.softrepeat = true
-    ne.content = '\xEF\x8E\xA0'
+    ne.content = ''
     ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
         --function () mp.command('seek -5') end
@@ -1220,7 +1224,7 @@ function osc_init()
     ne = new_element('skipfrwd', 'button')
 
     ne.softrepeat = true
-    ne.content = '\xEF\x8E\x9F'
+    ne.content = ''
     ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
         --function () mp.command('seek +5') end
@@ -1240,7 +1244,7 @@ function osc_init()
     ne = new_element('cy_audio', 'button')
     ne.enabled = (#tracks_osc.audio > 0)
     ne.visible = (osc_param.playresx >= 540)
-    ne.content = '\xEF\x8E\xB7'
+    ne.content = ''
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
 		local msg = texts.off
@@ -1270,7 +1274,7 @@ function osc_init()
     ne = new_element('cy_sub', 'button')
     ne.enabled = (#tracks_osc.sub > 0)
     ne.visible = (osc_param.playresx >= 600)
-    ne.content = '\xEF\x8F\x93'
+    ne.content = ''
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
 		local msg = texts.off
@@ -1300,9 +1304,9 @@ function osc_init()
     ne = new_element('tog_fs', 'button')
     ne.content = function ()
         if (state.fullscreen) then
-            return ('\xEF\x85\xAC')
+            return ('')
         else
-            return ('\xEF\x85\xAD')
+            return ('')
         end
     end
     ne.visible = (osc_param.playresx >= 540)
