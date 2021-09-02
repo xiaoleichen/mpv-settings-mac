@@ -6,8 +6,7 @@
 -- https://github.com/cyl0/mpv-osc-morden-x
 
 -- fork by xiaoleichen
--- Use chars for icon from:
--- https://zavoloklom.github.io/material-design-iconic-font/cheatsheet.html
+-- https://github.com/xiaoleichen/mpv-settings-mac
 
 local assdraw = require 'mp.assdraw'
 local msg = require 'mp.msg'
@@ -44,6 +43,7 @@ local user_opts = {
                                 -- to be shown as OSC title
     showtitle = false,		-- show title and no hide timeout on pause
     timetotal = true,          	-- display total time instead of remaining time?
+    timems = false,             -- Display time down to millliseconds by default
     visibility = 'auto',        -- only used at init to set visibility_mode(...)
     windowcontrols = 'no',    -- whether to show window controls
     language = 'eng',		-- eng=English, chs=Chinese
@@ -139,6 +139,7 @@ local state = {
     maximized = false,
     osd = mp.create_osd_overlay('ass-events'),
     lastvisibility = user_opts.visibility,	-- save last visibility on pause if showtitle
+    fulltime = user_opts.timems,
 }
 
 local window_control_box_width = 138
@@ -1436,16 +1437,33 @@ function osc_init()
 
     -- tc_left (current pos)
     ne = new_element('tc_left', 'button')
-    ne.content = function () return (mp.get_property_osd('playback-time')) end
-
+    ne.content = function ()
+	if (state.fulltime) then
+		return (mp.get_property_osd('playback-time/full'))
+	else
+		return (mp.get_property_osd('playback-time'))
+	end
+    end
+    ne.eventresponder["mbtn_left_up"] = function ()
+        state.fulltime = not state.fulltime
+        request_init()
+    end
     -- tc_right (total/remaining time)
     ne = new_element('tc_right', 'button')
     ne.content = function ()
         if (mp.get_property_number('duration', 0) <= 0) then return '--:--:--' end
         if (state.rightTC_trem) then
+		if (state.fulltime) then
+			return ('-'..mp.get_property_osd('playtime-remaining/full'))
+		else
 			return ('-'..mp.get_property_osd('playtime-remaining'))
+		end
         else
+		if (state.fulltime) then
+			return (mp.get_property_osd('duration/full'))
+		else
 			return (mp.get_property_osd('duration'))
+		end
         end
     end
     ne.eventresponder['mbtn_left_up'] =
