@@ -42,7 +42,7 @@ local user_opts = {
     title = '${media-title}',   -- string compatible with property-expansion
                                 -- to be shown as OSC title
     showtitle = false,		-- show title and no hide timeout on pause
-    timetotal = true,          	-- display total time instead of remaining time?
+    timetotal = false,          	-- display total time instead of remaining time?
     timems = false,             -- Display time down to millliseconds by default
     visibility = 'auto',        -- only used at init to set visibility_mode(...)
     windowcontrols = 'no',    -- whether to show window controls
@@ -95,7 +95,7 @@ local osc_param = { -- calculated by osc_init()
 }
 
 local osc_styles = {
-    TransBg = '{\\blur75\\bord110\\1c&H000000&\\3c&H000000&}',
+    TransBg = '{\\blur100\\bord110\\1c&H000000&\\3c&H000000&}',
     SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
     SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
