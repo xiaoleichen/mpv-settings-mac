@@ -45,7 +45,7 @@ local user_opts = {
     timetotal = false,          -- display total time instead of remaining time?
     timems = false,             -- Display time down to millliseconds by default
     visibility = 'auto',        -- only used at init to set visibility_mode(...)
-    windowcontrols = 'no',      -- whether to show window controls
+    windowcontrols = 'auto',    -- whether to show window controls
     language = 'eng',           -- eng=English, chs=Chinese
     movesub = 'no',             -- whether move up subtitle when osc appears
                                 -- use with caution. it breaks setting sub pos runtime with r/t key
@@ -990,11 +990,16 @@ function window_controls()
     end
     ne.eventresponder['mbtn_left_up'] =
         function ()
-            if state.fullscreen then
-                mp.commandv('cycle', 'fullscreen')
-            else
-                mp.commandv('cycle', 'window-maximized')
-            end
+            -- If set no border, window-maximized covers Windows taskbar
+            -- and looks identical to fullscreen.
+            -- See: https://github.com/mpv-player/mpv/issues/7887
+            -- So already toggle MPV fullscreen
+            mp.commandv('cycle', 'fullscreen')
+            -- if state.fullscreen then
+            --     mp.commandv('cycle', 'fullscreen')
+            -- else
+            --     mp.commandv('cycle', 'window-maximized')
+            -- end
         end
     lo = add_layout('maximize')
     lo.geometry = second_geo
