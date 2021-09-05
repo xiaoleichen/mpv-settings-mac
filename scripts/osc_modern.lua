@@ -1278,7 +1278,7 @@ function osc_init()
     ne.content = ''
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
-         msg = texts.off
+        local msg = texts.off
         if not (get_track('sub') == 0) then
             msg = (texts.subtitle .. ' [' .. get_track('sub') .. ' ∕ ' .. #tracks_osc.sub .. '] ')
             local prop = mp.get_property('current-tracks/sub/lang')
