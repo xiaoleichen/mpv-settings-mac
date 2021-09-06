@@ -13,6 +13,8 @@ The settings work best with Mac. Adjust accordingly for other platforms.
 
 `osc_modern.lua` 
 
+![img](https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/main/preview.png)
+
 Forked from https://github.com/cyl0/mpv-osc-morden-x
 
 ## Changes
