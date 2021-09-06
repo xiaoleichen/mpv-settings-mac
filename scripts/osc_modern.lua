@@ -95,7 +95,7 @@ local osc_param = { -- calculated by osc_init()
 }
 
 local osc_styles = {
-    TransBg = '{\\blur100\\bord110\\1c&H000000&\\3c&H000000&}',
+    TransBg = '{\\blur100\\bord98\\1c&H000000&\\3c&H000000&}',
     SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
     SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
@@ -999,7 +999,7 @@ layouts = function ()
     osc_param.areas = {} -- delete areas
 
     -- area for active mouse input
-    add_area('input', get_hitbox_coords(posX, posY, 1, osc_geo.w, 104))
+    add_area('input', get_hitbox_coords(posX, posY, 1, osc_geo.w, 92))
 
     -- area for show/hide
     add_area('showhide', 0, 0, osc_param.playresx, osc_param.playresy)
@@ -1030,16 +1030,20 @@ layouts = function ()
     --
     -- Seekbar
     --
+    local seekbarMarginX = 216
+    if state.fulltime then
+        seekbarMarginX = 264
+    end
     new_element('bgbar1', 'box')
     lo = add_layout('bgbar1')
-    lo.geometry = {x = refX , y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 2}
+    lo.geometry = {x = refX , y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = 2}
     lo.layer = 13
     lo.style = osc_styles.SeekbarBg
     lo.alpha[1] = 128
     lo.alpha[3] = 128
 
     lo = add_layout('seekbar')
-    lo.geometry = {x = refX, y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 16}
+    lo.geometry = {x = refX, y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = 16}
     lo.style = osc_styles.SeekbarFg
     lo.slider.gap = 7
     lo.slider.tooltip_style = osc_styles.Tooltip
@@ -1094,7 +1098,7 @@ layouts = function ()
     lo.geometry = {x = osc_geo.w - 87, y = refY - 40, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
 
-    geo = { x = 25, y = refY - 132, an = 1, w = osc_geo.w - 50, h = 48 }
+    geo = { x = 25, y = refY - 111, an = 1, w = osc_geo.w - 50, h = 48 }
     lo = add_layout('title')
     lo.geometry = geo
     lo.style = string.format('%s{\\clip(%f,%f,%f,%f)}', osc_styles.Title,
