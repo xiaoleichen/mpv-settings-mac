@@ -1217,7 +1217,10 @@ function osc_init()
     ne.eventresponder['mbtn_left_down'] =
         --function () mp.command('seek -5') end
         --function () mp.commandv('seek', -5, 'relative', 'keyframes') end
-        function () mp.commandv("add", "chapter", -1) end
+        function ()
+            mp.commandv("add", "chapter", -1)
+            show_message(get_chapterlist())
+        end
     --ne.eventresponder['shift+mbtn_left_down'] =
         --function () mp.commandv('frame-back-step') end
     ne.eventresponder['mbtn_right_down'] =
@@ -1234,7 +1237,10 @@ function osc_init()
     ne.eventresponder['mbtn_left_down'] =
         --function () mp.command('seek +5') end
         --function () mp.commandv('seek', 5, 'relative', 'keyframes') end
-        function () mp.commandv("add", "chapter", 1) end
+        function ()
+            mp.commandv("add", "chapter", 1)
+            show_message(get_chapterlist())
+        end
     --ne.eventresponder['shift+mbtn_left_down'] =
         --function () mp.commandv('frame-step') end
     ne.eventresponder['mbtn_right_down'] =

@@ -24,6 +24,8 @@ Forked from https://github.com/cyl0/mpv-osc-morden-x
 * Always hide window controls.
 * Smaller OSC background.
 * More responsive to mouse move (`minmousemove = 0`).
+* Move down seekbar to align with time code.
+* Show chapter list when skipping back/forward to previous/next chapter.
 
 ## Usage
 
