@@ -1438,6 +1438,7 @@ function osc_init()
                     end
                     mp.commandv('set', 'chapter', ch - 1)
                     --if chapters[ch].title then show_message(chapters[ch].time) end
+                    show_message(get_chapterlist())
                 end
             end
         end
