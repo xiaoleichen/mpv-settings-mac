@@ -26,6 +26,7 @@ Forked from https://github.com/cyl0/mpv-osc-morden-x
 * More responsive to mouse move (`minmousemove = 0`).
 * Move down seekbar to align with time code.
 * Show chapter list when skipping back/forward to previous/next chapter.
+* Move subtitle (ass not supported) when controller appears and disappears.
 
 ## Usage
 
@@ -45,3 +46,9 @@ Forked from https://github.com/cyl0/mpv-osc-morden-x
 * Left mouse button: display time in milliseconds
 ### Duration
 * Left mouse button: display total time instead of remaining time
+
+# Other Scrpts
+
+`assrt.lua`
+
+Dowload subtitles from assrt.net. Pulled from: https://github.com/AssrtOSS/mpv-assrt/tree/0.33
