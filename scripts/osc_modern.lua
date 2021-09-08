@@ -47,6 +47,11 @@ local user_opts = {
     visibility = 'auto',        -- only used at init to set visibility_mode(...)
     windowcontrols = 'no',      -- whether to show window controls
     language = 'eng',           -- eng=English, chs=Chinese
+    movesub = 'no',             -- whether move up subtitle when osc appears
+                                -- use with caution. it breaks setting sub pos runtime with r/t key
+    subpos = 100,               -- with movesub enabled, initial subtitle position
+                                -- it overrides --sub-pos property in mpv.conf
+    subpos_withosc = 88,        -- with movesub enabled, subtitle position when osc appears
 }
 
 -- Localization
@@ -1127,6 +1132,9 @@ end
 -- OSC INIT
 function osc_init()
     msg.debug('osc_init')
+    if user_opts.movesub == 'yes' then
+        mp.set_property_number('options/sub-pos', user_opts.subpos)
+    end
 
     -- set canvas resolution according to display aspect and scaling setting
     local baseResY = 720
@@ -1514,6 +1522,9 @@ function show_osc()
     if (user_opts.fadeduration > 0) then
         state.anitype = nil
     end
+    if user_opts.movesub == 'yes' then
+        mp.set_property_number('options/sub-pos', user_opts.subpos_withosc)
+    end
 end
 
 function hide_osc()
@@ -1527,6 +1538,9 @@ function hide_osc()
         if not(state.osc_visible == false) then
             state.anitype = 'out'
             request_tick()
+            if user_opts.movesub == 'yes' then
+                mp.set_property_number('options/sub-pos', user_opts.subpos)
+            end
         end
     else
         osc_visible(false)
