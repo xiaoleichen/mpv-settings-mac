@@ -27,6 +27,7 @@ Forked from https://github.com/cyl0/mpv-osc-morden-x
 * Move down seekbar to align with time code.
 * Show chapter list when skipping back/forward to previous/next chapter.
 * Move subtitle (ass not supported) when controller appears and disappears.
+* Add options to customize time code and tooltip font sizes.
 
 ## Usage
 
