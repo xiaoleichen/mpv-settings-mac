@@ -54,6 +54,11 @@ local user_opts = {
     subpos_withosc = 88,        -- with movesub enabled, subtitle position when osc appears
     timefontsize = 17,          -- font size of time code
     tooltipfontsize = 18,       -- font size of tooltip
+    seekbarfgcolor = 'E39C42',   -- seekbar foreground color, including seekbar handle and seek range
+    seekbarfgheight = 16,        -- seekbar foreground height
+    seekbarbgcolor = 'FFFFFF',   -- seekbar background color
+    seekbarbgalpha = 128,        -- seekbar background alpha
+    seekbarbgheight = 2,         -- seekbar background height
 }
 
 -- Localization
@@ -103,8 +108,8 @@ local osc_param = { -- calculated by osc_init()
 
 local osc_styles = {
     TransBg = '{\\blur100\\bord98\\1c&H000000&\\3c&H000000&}',
-    SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
-    SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
+    SeekbarBg = '{\\blur0\\bord0\\1c&H' ..user_opts.seekbarbgcolor.. '&}',
+    SeekbarFg = '{\\blur1\\bord1\\1c&H' ..user_opts.seekbarfgcolor.. '&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
     Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
     Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
@@ -1043,14 +1048,14 @@ layouts = function ()
     end
     new_element('bgbar1', 'box')
     lo = add_layout('bgbar1')
-    lo.geometry = {x = refX , y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = 2}
+    lo.geometry = {x = refX , y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarbgheight}
     lo.layer = 13
     lo.style = osc_styles.SeekbarBg
-    lo.alpha[1] = 128
-    lo.alpha[3] = 128
+    lo.alpha[1] = user_opts.seekbarbgalpha
+    lo.alpha[3] = user_opts.seekbarbgalpha
 
     lo = add_layout('seekbar')
-    lo.geometry = {x = refX, y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = 16}
+    lo.geometry = {x = refX, y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarfgheight}
     lo.style = osc_styles.SeekbarFg
     lo.slider.gap = 7
     lo.slider.tooltip_style = osc_styles.Tooltip
