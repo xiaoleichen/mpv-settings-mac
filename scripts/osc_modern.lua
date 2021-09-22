@@ -54,11 +54,12 @@ local user_opts = {
     subpos_withosc = 88,        -- with movesub enabled, subtitle position when osc appears
     timefontsize = 17,          -- font size of time code
     tooltipfontsize = 18,       -- font size of tooltip
-    seekbarfgcolor = 'E39C42',   -- seekbar foreground color, including seekbar handle and seek range
-    seekbarfgheight = 16,        -- seekbar foreground height
-    seekbarbgcolor = 'FFFFFF',   -- seekbar background color
-    seekbarbgalpha = 128,        -- seekbar background alpha
-    seekbarbgheight = 2,         -- seekbar background height
+    fontweight = 'regular',     -- osc font weight
+    seekbarfgcolor = 'E39C42',  -- seekbar foreground color, including seekbar handle and seek range
+    seekbarfgheight = 16,       -- seekbar foreground height
+    seekbarbgcolor = 'FFFFFF',  -- seekbar background color
+    seekbarbgalpha = 128,       -- seekbar background alpha
+    seekbarbgheight = 2,        -- seekbar background height
 }
 
 -- Localization
@@ -106,16 +107,27 @@ local osc_param = { -- calculated by osc_init()
     areas = {},
 }
 
+local font_weights = {
+    ['light'] = '\\b300',
+    ['regular'] = '\\b400',
+    ['medium'] = '\\b500',
+    ['semibold'] = '\\b600',
+    ['bold'] = '\\b700',
+    ['heavy'] = '\\b900',
+}
+
+local font_style = '\\fn' .. user_opts.font .. font_weights[user_opts.fontweight]
+
 local osc_styles = {
     TransBg = '{\\blur100\\bord98\\1c&H000000&\\3c&H000000&}',
-    SeekbarBg = '{\\blur0\\bord0\\1c&H' ..user_opts.seekbarbgcolor.. '&}',
-    SeekbarFg = '{\\blur1\\bord1\\1c&H' ..user_opts.seekbarfgcolor.. '&}',
+    SeekbarBg = '{\\blur0\\bord0\\1c&H' .. user_opts.seekbarbgcolor .. '&}',
+    SeekbarFg = '{\\blur1\\bord1\\1c&H' .. user_opts.seekbarfgcolor .. '&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
     Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
     Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs22\\fnmaterial-design-iconic-font}',
-    Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs' ..user_opts.timefontsize.. '\\fn' .. user_opts.font .. '}',
-    Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs' ..user_opts.tooltipfontsize.. '\\fn' .. user_opts.font .. '}',
-    Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
+    Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs' .. user_opts.timefontsize .. font_style .. '}',
+    Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs' .. user_opts.tooltipfontsize .. font_style .. '}',
+    Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2' .. font_style .. '}',
     WinCtrl = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs20\\fnmpv-osd-symbols}',
     elementDown = '{\\1c&H999999&}',
 }
