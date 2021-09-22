@@ -112,7 +112,7 @@ local osc_styles = {
     SeekbarFg = '{\\blur1\\bord1\\1c&H' ..user_opts.seekbarfgcolor.. '&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
     Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
-    Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
+    Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs22\\fnmaterial-design-iconic-font}',
     Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs' ..user_opts.timefontsize.. '\\fn' .. user_opts.font .. '}',
     Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs' ..user_opts.tooltipfontsize.. '\\fn' .. user_opts.font .. '}',
     Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
@@ -1048,14 +1048,14 @@ layouts = function ()
     end
     new_element('bgbar1', 'box')
     lo = add_layout('bgbar1')
-    lo.geometry = {x = refX , y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarbgheight}
+    lo.geometry = {x = refX, y = refY - 70, an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarbgheight}
     lo.layer = 13
     lo.style = osc_styles.SeekbarBg
     lo.alpha[1] = user_opts.seekbarbgalpha
     lo.alpha[3] = user_opts.seekbarbgalpha
 
     lo = add_layout('seekbar')
-    lo.geometry = {x = refX, y = refY - 75 , an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarfgheight}
+    lo.geometry = {x = refX, y = refY - 70, an = 5, w = osc_geo.w - seekbarMarginX, h = user_opts.seekbarfgheight}
     lo.style = osc_styles.SeekbarFg
     lo.slider.gap = 7
     lo.slider.tooltip_style = osc_styles.Tooltip
@@ -1063,58 +1063,58 @@ layouts = function ()
 
     -- buttons
     lo = add_layout('pl_prev')
-    lo.geometry = {x = refX - 120, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX - 120, y = refY - 35, an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
 
     lo = add_layout('skipback')
-    lo.geometry = {x = refX - 60, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX - 60, y = refY - 35, an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
 
 
     lo = add_layout('playpause')
-    lo.geometry = {x = refX, y = refY - 40 , an = 5, w = 45, h = 45}
+    lo.geometry = {x = refX, y = refY - 35, an = 5, w = 45, h = 45}
     lo.style = osc_styles.Ctrl1
 
     lo = add_layout('skipfrwd')
-    lo.geometry = {x = refX + 60, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX + 60, y = refY - 35, an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
 
     lo = add_layout('pl_next')
-    lo.geometry = {x = refX + 120, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX + 120, y = refY - 35, an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
 
 
     -- Time
     lo = add_layout('tc_left')
-    lo.geometry = {x = 25, y = refY - 84, an = 7, w = 64, h = 20}
+    lo.geometry = {x = 25, y = refY - 79, an = 7, w = 64, h = 20}
     lo.style = osc_styles.Time
 
 
     lo = add_layout('tc_right')
-    lo.geometry = {x = osc_geo.w - 25 , y = refY -84, an = 9, w = 64, h = 20}
+    lo.geometry = {x = osc_geo.w - 25, y = refY - 79, an = 9, w = 64, h = 20}
     lo.style = osc_styles.Time
 
     lo = add_layout('cy_audio')
-    lo.geometry = {x = 37, y = refY - 40, an = 5, w = 24, h = 24}
+    lo.geometry = {x = 37, y = refY - 35, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
 
     lo = add_layout('cy_sub')
-    lo.geometry = {x = 87, y = refY - 40, an = 5, w = 24, h = 24}
+    lo.geometry = {x = 80, y = refY - 35, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
 
     lo = add_layout('tog_fs')
-    lo.geometry = {x = osc_geo.w - 37, y = refY - 40, an = 5, w = 24, h = 24}
+    lo.geometry = {x = osc_geo.w - 37, y = refY - 35, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
 
     lo = add_layout('tog_info')
-    lo.geometry = {x = osc_geo.w - 87, y = refY - 40, an = 5, w = 24, h = 24}
+    lo.geometry = {x = osc_geo.w - 80, y = refY - 35, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
 
-    geo = { x = 25, y = refY - 111, an = 1, w = osc_geo.w - 50, h = 48 }
+    geo = { x = 25, y = refY - 106, an = 1, w = osc_geo.w - 50, h = 48 }
     lo = add_layout('title')
     lo.geometry = geo
     lo.style = string.format('%s{\\clip(%f,%f,%f,%f)}', osc_styles.Title,
-                                geo.x, geo.y - geo.h, geo.x + geo.w , geo.y)
+                                geo.x, geo.y - geo.h, geo.x + geo.w, geo.y)
     lo.alpha[3] = 0
 end
 
@@ -1275,7 +1275,7 @@ function osc_init()
     ne.tooltipF = function ()
         local msg = texts.off
         if not (get_track('audio') == 0) then
-            msg = (texts.audio .. ' [' .. get_track('audio') .. ' ∕ ' .. #tracks_osc.audio .. '] ')
+            msg = (texts.audio .. ' [' .. get_track('audio') .. ' / ' .. #tracks_osc.audio .. '] ')
             local prop = mp.get_property('current-tracks/audio/title') --('current-tracks/audio/lang')
             if not prop then
                 prop = texts.na
@@ -1305,7 +1305,7 @@ function osc_init()
     ne.tooltipF = function ()
         local msg = texts.off
         if not (get_track('sub') == 0) then
-            msg = (texts.subtitle .. ' [' .. get_track('sub') .. ' ∕ ' .. #tracks_osc.sub .. '] ')
+            msg = (texts.subtitle .. ' [' .. get_track('sub') .. ' / ' .. #tracks_osc.sub .. '] ')
             local prop = mp.get_property('current-tracks/sub/lang')
             if not prop then
                 prop = texts.na
