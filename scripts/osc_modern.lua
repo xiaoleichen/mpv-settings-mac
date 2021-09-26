@@ -1152,7 +1152,11 @@ end
 function osc_init()
     msg.debug('osc_init')
     if user_opts.movesub == 'yes' then
-        mp.set_property_number('options/sub-pos', user_opts.subpos)
+        if state.osc_visible then
+            mp.set_property_number('options/sub-pos', user_opts.subpos_withosc)
+        else
+            mp.set_property_number('options/sub-pos', user_opts.subpos)
+        end
     end
 
     -- set canvas resolution according to display aspect and scaling setting
