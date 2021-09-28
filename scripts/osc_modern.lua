@@ -1254,6 +1254,7 @@ function osc_init()
                 show_message(get_chapterlist())
             else
                 mp.commandv('seek', -10, 'relative', 'keyframes')
+                mp.osd_message(get_progress_osd_msg(false))
             end
         end
     --ne.eventresponder['shift+mbtn_left_down'] =
@@ -1264,6 +1265,7 @@ function osc_init()
                 show_message(get_chapterlist())
             else
                 mp.commandv('seek', -60, 'relative', 'keyframes')
+                mp.osd_message(get_progress_osd_msg(false))
             end
         end
 
@@ -1280,6 +1282,7 @@ function osc_init()
                 show_message(get_chapterlist())
             else
                 mp.commandv('seek', 10, 'relative', 'keyframes')
+                mp.osd_message(get_progress_osd_msg(true))
             end
         end
     --ne.eventresponder['shift+mbtn_left_down'] =
@@ -1290,6 +1293,7 @@ function osc_init()
                 show_message(get_chapterlist())
             else
                 mp.commandv('seek', 60, 'relative', 'keyframes')
+                mp.osd_message(get_progress_osd_msg(true))
             end
         end
 
@@ -1535,6 +1539,19 @@ function osc_init()
 
     --do something with the elements
     prepare_elements()
+end
+
+function get_progress_osd_msg(is_forward)
+    local playback_time = mp.get_property_osd('playback-time')
+    local duration = mp.get_property_osd('duration')
+    local percent_pos = mp.get_property_osd('percent-pos')
+    local msg
+    if is_forward then
+        msg = '▶'
+    else
+        msg = '◀'
+    end
+    return string.format(msg .. ' %s / %s (%s%%)', playback_time, duration, percent_pos)
 end
 
 function shutdown()
