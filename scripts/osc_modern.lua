@@ -1206,6 +1206,7 @@ function osc_init()
     ne.eventresponder['mbtn_left_up'] =
         function ()
             mp.commandv('playlist-prev', 'weak')
+            show_message(get_playlist())
         end
     ne.eventresponder['mbtn_right_up'] =
         function () show_message(get_playlist()) end
@@ -1218,6 +1219,7 @@ function osc_init()
     ne.eventresponder['mbtn_left_up'] =
         function ()
             mp.commandv('playlist-next', 'weak')
+            show_message(get_playlist())
         end
     ne.eventresponder['mbtn_right_up'] =
         function () show_message(get_playlist()) end
@@ -1244,40 +1246,52 @@ function osc_init()
 
     ne.softrepeat = true
     ne.content = ''
-    ne.enabled = (have_ch) -- disables button when no chapters available.
+    -- ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
-        --function () mp.command('seek -5') end
-        --function () mp.commandv('seek', -5, 'relative', 'keyframes') end
         function ()
-            mp.commandv("add", "chapter", -1)
-            show_message(get_chapterlist())
+            if have_ch then
+                mp.commandv("add", "chapter", -1)
+                show_message(get_chapterlist())
+            else
+                mp.commandv('seek', -10, 'relative', 'keyframes')
+            end
         end
     --ne.eventresponder['shift+mbtn_left_down'] =
         --function () mp.commandv('frame-back-step') end
     ne.eventresponder['mbtn_right_down'] =
-        function () show_message(get_chapterlist()) end
-        --function () mp.command('seek -60') end
-        --function () mp.commandv('seek', -60, 'relative', 'keyframes') end
+        function () 
+            if have_ch then
+                show_message(get_chapterlist())
+            else
+                mp.commandv('seek', -60, 'relative', 'keyframes')
+            end
+        end
 
     --skipfrwd
     ne = new_element('skipfrwd', 'button')
 
     ne.softrepeat = true
     ne.content = ''
-    ne.enabled = (have_ch) -- disables button when no chapters available.
+    -- ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
-        --function () mp.command('seek +5') end
-        --function () mp.commandv('seek', 5, 'relative', 'keyframes') end
         function ()
-            mp.commandv("add", "chapter", 1)
-            show_message(get_chapterlist())
+            if have_ch then
+                mp.commandv("add", "chapter", 1)
+                show_message(get_chapterlist())
+            else
+                mp.commandv('seek', 10, 'relative', 'keyframes')
+            end
         end
     --ne.eventresponder['shift+mbtn_left_down'] =
         --function () mp.commandv('frame-step') end
     ne.eventresponder['mbtn_right_down'] =
-        function () show_message(get_chapterlist()) end
-        --function () mp.command('seek +60') end
-        --function () mp.commandv('seek', 60, 'relative', 'keyframes') end
+        function ()
+            if have_ch then
+                show_message(get_chapterlist())
+            else
+                mp.commandv('seek', 60, 'relative', 'keyframes')
+            end
+        end
 
     --
     update_tracklist()
