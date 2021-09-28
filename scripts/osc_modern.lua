@@ -1545,13 +1545,12 @@ function get_progress_osd_msg(is_forward)
     local playback_time = mp.get_property_osd('playback-time')
     local duration = mp.get_property_osd('duration')
     local percent_pos = mp.get_property_osd('percent-pos')
-    local msg
+    -- From enum mp_osd_font_codepoints (https://github.com/mpv-player/mpv/blob/master/sub/osd.h)
+    local osd_symbol = 4
     if is_forward then
-        msg = '▶'
-    else
-        msg = '◀'
+        osd_symbol = 5
     end
-    return string.format(msg .. ' %s / %s (%s%%)', playback_time, duration, percent_pos)
+    return string.format('\xFF%c %s / %s (%s%%)', osd_symbol, playback_time, duration, percent_pos)
 end
 
 function shutdown()
