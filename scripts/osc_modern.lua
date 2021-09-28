@@ -1201,7 +1201,7 @@ function osc_init()
     -- prev
     ne = new_element('pl_prev', 'button')
 
-    ne.content = ''
+    ne.content = '\239\142\181'
     ne.enabled = (pl_pos > 1) or (loop ~= 'no')
     ne.eventresponder['mbtn_left_up'] =
         function ()
@@ -1214,7 +1214,7 @@ function osc_init()
     --next
     ne = new_element('pl_next', 'button')
 
-    ne.content = ''
+    ne.content = '\239\142\180'
     ne.enabled = (have_pl and (pl_pos < pl_count)) or (loop ~= 'no')
     ne.eventresponder['mbtn_left_up'] =
         function ()
@@ -1231,9 +1231,9 @@ function osc_init()
 
     ne.content = function ()
         if mp.get_property('pause') == 'yes' then
-            return ('')
+            return ('\239\142\170')
         else
-            return ('')
+            return ('\239\142\167')
         end
     end
     ne.eventresponder['mbtn_left_up'] =
@@ -1245,7 +1245,7 @@ function osc_init()
     ne = new_element('skipback', 'button')
 
     ne.softrepeat = true
-    ne.content = ''
+    ne.content = '\239\142\160'
     -- ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
         function ()
@@ -1260,7 +1260,7 @@ function osc_init()
     --ne.eventresponder['shift+mbtn_left_down'] =
         --function () mp.commandv('frame-back-step') end
     ne.eventresponder['mbtn_right_down'] =
-        function () 
+        function ()
             if have_ch then
                 show_message(get_chapterlist())
             else
@@ -1273,7 +1273,7 @@ function osc_init()
     ne = new_element('skipfrwd', 'button')
 
     ne.softrepeat = true
-    ne.content = ''
+    ne.content = '\239\142\159'
     -- ne.enabled = (have_ch) -- disables button when no chapters available.
     ne.eventresponder['mbtn_left_down'] =
         function ()
@@ -1304,7 +1304,7 @@ function osc_init()
     ne = new_element('cy_audio', 'button')
     ne.enabled = (#tracks_osc.audio > 0)
     ne.visible = (osc_param.playresx >= 540)
-    ne.content = ''
+    ne.content = '\239\142\183'
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
         local msg = texts.off
@@ -1334,7 +1334,7 @@ function osc_init()
     ne = new_element('cy_sub', 'button')
     ne.enabled = (#tracks_osc.sub > 0)
     ne.visible = (osc_param.playresx >= 600)
-    ne.content = ''
+    ne.content = '\239\140\164' -- '\239\143\147'
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
         local msg = texts.off
@@ -1364,9 +1364,9 @@ function osc_init()
     ne = new_element('tog_fs', 'button')
     ne.content = function ()
         if (state.fullscreen) then
-            return ('')
+            return ('\239\133\172')
         else
-            return ('')
+            return ('\239\133\173')
         end
     end
     ne.visible = (osc_param.playresx >= 540)
@@ -1375,7 +1375,7 @@ function osc_init()
 
     --tog_info
     ne = new_element('tog_info', 'button')
-    ne.content = ''
+    ne.content = '\239\135\176'
     ne.visible = (osc_param.playresx >= 600)
     ne.eventresponder['mbtn_left_up'] =
         function () mp.commandv('script-binding', 'stats/display-stats-toggle') end
@@ -1550,7 +1550,7 @@ function get_progress_osd_msg(is_forward)
     if is_forward then
         osd_symbol = 5
     end
-    return string.format('\xFF%c %s / %s (%s%%)', osd_symbol, playback_time, duration, percent_pos)
+    return string.format('\255%c %s / %s (%s%%)', osd_symbol, playback_time, duration, percent_pos)
 end
 
 function shutdown()
