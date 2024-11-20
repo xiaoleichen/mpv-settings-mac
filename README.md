@@ -1,21 +1,20 @@
 # Intro
 
-The settings work best with Mac. Adjust accordingly for other platforms.
-
 * OSD and subtitle font = `PingFang SC`
-* Volume control set to work with trackpad
-  * Key bindings: https://github.com/xiaoleichen/mpv-settings-mac/blob/main/input.conf
+* Key bindings: https://github.com/xiaoleichen/mpv-settings-mac/blob/main/input.conf
 * MPV border enabled and window controlls disabled
 * Always show dark title bar
   * `macos-title-bar-appearance=darkAqua`
 
 # OSC 
 
-`osc_modern.lua` 
+```
+modernx.lua
+```
 
 ![img](https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/main/preview.png)
 
-Forked from https://github.com/cyl0/mpv-osc-morden-x
+Forked from https://github.com/cyl0/ModernX
 
 ## Changes
 
@@ -51,6 +50,8 @@ Forked from https://github.com/cyl0/mpv-osc-morden-x
 
 # Other Scrpts
 
-`assrt.lua`
+* `assrt.lua`: Dowload subtitles from assrt.net. Pulled from [mpv-assrt](https://github.com/AssrtOSS/mpv-assrt/).
 
-Dowload subtitles from assrt.net. Pulled from: https://github.com/AssrtOSS/mpv-assrt/tree/0.33
+* `paste_url.lua`: Copy and paste links into mpv with ctrl + v to start playback of a video. Works in windows only and requires PowerShell. Pulled from [mpv-scripts](https://github.com/zenyd/mpv-scripts).
+
+* Alternative OSC [ModernZ](https://github.com/xiaoleichen/ModernZ). Works with MPV 0.39+ and suppports [thumbfast](https://github.com/po5/thumbfast).

@@ -96,7 +96,7 @@ local language = {
     }
 }
 -- read options from config and command-line
-opt.read_options(user_opts, 'osc', function(list) update_options(list) end)
+opt.read_options(user_opts, 'modernx', function(list) update_options(list) end)
 -- apply lang opts
 local texts = language[user_opts.language]
 local osc_param = { -- calculated by osc_init()
