@@ -3,7 +3,7 @@
 rm -rf mpv mpv_win mpv_linux
 mkdir -p ./mpv/scripts ./mpv/script-opts ./mpv/fonts
 
-echo 'Downloading files...'
+echo '  Downloading files...'
 curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/mpv.conf -o ./mpv/mpv.conf
 curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/input.conf -o ./mpv/input.conf
 curl -L -s https://raw.githubusercontent.com/AssrtOSS/mpv-assrt/refs/heads/master/scripts/assrt.lua -o ./mpv/scripts/assrt.lua
@@ -17,21 +17,21 @@ curl -L -s https://github.com/xiaoleichen/ModernZ/raw/refs/heads/main/fluent-sys
 
 function replace_options() {
   local file=$1
-  shift
-  local options=("$@")
-  for option in ${options[@]}; do
+  local options_name=$2[@]
+  local options=("${!options_name}")
+  for option in "${options[@]}"; do
   	local old=`echo $option | cut -d ":" -f 1`
   	local new=`echo $option | cut -d ":" -f 2`
     if grep -q $old $file; then
     	sed -i -e "s/$old/$new/g" "$file"
-        # echo $old replaced with $new
+      echo $old "===>" $new
     else
     	echo $old not found
     fi
   done
 }
-
-echo 'Replacing options...'
+echo
+echo '  Replacing options...'
 options=(
   'bottomhover=yes:bottomhover=no'
   'vidscale=auto:vidscale=no'
@@ -46,9 +46,9 @@ options=(
   'scalefullscreen=1.0:scalefullscreen=2.0'
 )
 
-replace_options "./mpv/script-opts/modernz.conf" ${options[@]}
-
-echo 'Making Windows copy...'
+replace_options "./mpv/script-opts/modernz.conf" options
+echo
+echo '  Making Windows copy...'
 cp -r ./mpv/ ./mpv_win/
 
 win_options=(
@@ -56,22 +56,23 @@ win_options=(
   'scalefullscreen=2.0:scalefullscreen=1.5'
 )
 disable_mac_dark_title_bar_options=(
-  'macos-title-bar-appearance=darkAqua:#macos-title-bar-appearance=darkAqua'
+  'macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua'
 )
-replace_options "./mpv_win/script-opts/modernz.conf" ${win_options[@]}
-replace_options "./mpv_win/mpv.conf" ${disable_mac_dark_title_bar_options[@]}
+replace_options "./mpv_win/script-opts/modernz.conf" win_options
+replace_options "./mpv_win/mpv.conf" disable_mac_dark_title_bar_options
 # Additional script for Windows
 curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
 
-
-echo 'Making Linux copy...'
+echo
+echo '  Making Linux copy...'
 cp -r ./mpv/ ./mpv_linux/
 
 linux_options=(
   'scalewindowed=2.0:scalewindowed=1.0'
   'scalefullscreen=2.0:scalefullscreen=1.0'
 )
-replace_options "./mpv_linux/script-opts/modernz.conf" ${linux_options[@]}
-replace_options "./mpv_linux/mpv.conf" ${disable_mac_dark_title_bar_options[@]}
+replace_options "./mpv_linux/script-opts/modernz.conf" linux_options
+replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
-echo "Done"
+echo
+echo '  Done'
