@@ -22,7 +22,7 @@ function replace_options() {
   for option in "${options[@]}"; do
   	local old=`echo $option | cut -d ":" -f 1`
   	local new=`echo $option | cut -d ":" -f 2`
-    if grep -q $old $file; then
+    if grep -q "$old" "$file"; then
     	sed -i -e "s/$old/$new/g" "$file"
       echo $old "===>" $new
     else
