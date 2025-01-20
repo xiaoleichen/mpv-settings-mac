@@ -23,7 +23,7 @@ function replace_options() {
   	local old=`echo $option | cut -d ":" -f 1`
   	local new=`echo $option | cut -d ":" -f 2`
     if grep -q "$old" "$file"; then
-    	sed -i -e "s/$old/$new/g" "$file"
+    	sed -i -e "s@$old@$new@g" "$file"
       echo $old "===>" $new
     else
     	echo $old not found
@@ -74,5 +74,28 @@ linux_options=(
 replace_options "./mpv_linux/script-opts/modernz.conf" linux_options
 replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
+
+# Disable interactive menu on Linux. It's still buggy for v0.39.0
+additional_linux_options=(
+  'playlist_mbtn_left_command=script-binding select/select-playlist; script-message-to modernz osc-hide:playlist_mbtn_left_command=show-text ${playlist} 3000'
+  'vol_ctrl_mbtn_right_command=script-binding select/select-audio-device; script-message-to modernz osc-hide:vol_ctrl_mbtn_right_command=no-osd cycle mute'
+  'audio_track_mbtn_left_command=script-binding select/select-aid; script-message-to modernz osc-hide:audio_track_mbtn_left_command=cycle audio'
+  'audio_track_mbtn_mid_command=cycle audio down:audio_track_mbtn_mid_command=ignore'
+  'audio_track_mbtn_right_command=cycle audio:audio_track_mbtn_right_command=cycle audio down'
+  'sub_track_mbtn_left_command=script-binding select/select-sid; script-message-to modernz osc-hide:sub_track_mbtn_left_command=cycle sub'
+  'sub_track_mbtn_mid_command=cycle sub down:sub_track_mbtn_mid_command=ignore'
+  'sub_track_mbtn_right_command=cycle sub:sub_track_mbtn_right_command=cycle sub down'
+  'chapter_prev_mbtn_right_command=script-binding select/select-chapter; script-message-to modernz osc-hide:chapter_prev_mbtn_right_command=show-text ${chapter-list} 3000'
+  'chapter_next_mbtn_right_command=script-binding select/select-chapter; script-message-to modernz osc-hide:chapter_next_mbtn_right_command=show-text ${chapter-list} 3000'
+  'chapter_title_mbtn_left_command=script-binding select/select-chapter; script-message-to modernz osc-hide:chapter_title_mbtn_left_command=show-text ${chapter-list} 3000'
+  'playlist_prev_mbtn_right_command=script-binding select/select-playlist; script-message-to modernz osc-hide:playlist_prev_mbtn_right_command=show-text ${playlist} 3000'
+  'playlist_next_mbtn_right_command=script-binding select/select-playlist; script-message-to modernz osc-hide:playlist_next_mbtn_right_command=show-text ${playlist} 3000'
+)
+replace_options "./mpv_linux/script-opts/modernz.conf" additional_linux_options
+
+lua_linux_updates=(
+  'stats/display-page-1-toggle:stats/display-stats-toggle'
+)
+replace_options "./mpv_linux/scripts/modernz.lua" lua_linux_updates
 echo
 echo '  Done'
