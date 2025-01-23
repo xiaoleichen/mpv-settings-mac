@@ -24,9 +24,9 @@ function replace_options() {
   	local new=`echo $option | cut -d ":" -f 2`
     if grep -q "$old" "$file"; then
     	sed -i -e "s@$old@$new@g" "$file"
-      echo $old "===>" $new
+      echo "✓" $old "===>" $new
     else
-    	echo $old not found
+    	echo "✘" $old not found
     fi
   done
 }
