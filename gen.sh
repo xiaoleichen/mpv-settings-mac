@@ -11,6 +11,7 @@ curl -L -s https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thu
 curl -L -s https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.conf -o ./mpv/script-opts/thumbfast.conf
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.lua -o ./mpv/scripts/modernz.lua
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.conf -o ./mpv/script-opts/modernz.conf
+curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
 curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/PingFang-SC-Regular.ttf -o ./mpv/fonts/PingFang-SC-Regular.ttf
 curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/DejaVuSans.ttf -o ./mpv/fonts/DejaVuSans.ttf
 curl -L -s https://github.com/xiaoleichen/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
