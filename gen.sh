@@ -78,3 +78,13 @@ echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
 
 echo
 echo '  Done'
+
+exit 0
+#### Commands for clients ####
+
+# Windows
+rm -Path "$env:USERPROFILE\AppData\Roaming\mpv\" -Force -Recurse; cp "\\gmk\git\mpv-settings-mac\mpv_win\" "$env:USERPROFILE\AppData\Roaming\mpv" -Recurse
+# Linux
+rm -rf ~/.config/mpv && mkdir ~/.config/mpv && cd ~/.config/mpv && smbget --recursive smb://gmk.local/git/mpv-settings-mac/mpv_linux
+# MacOS
+rm -rf ~/.config/mpv && cp -r /Volumes/git/mpv-settings-mac/mpv ~/.config/mpv
