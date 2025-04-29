@@ -14,7 +14,8 @@ curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/m
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
 curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/PingFang-SC-Regular.ttf -o ./mpv/fonts/PingFang-SC-Regular.ttf
 curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/DejaVuSans.ttf -o ./mpv/fonts/DejaVuSans.ttf
-curl -L -s https://github.com/xiaoleichen/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
+curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
+curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/material-design-icons.ttf -o ./mpv/fonts/material-design-icons.ttf
 
 function replace_options() {
   local file=$1
