@@ -1,6 +1,5 @@
 # Intro
 
-* OSD and subtitle font = `PingFang SC`
 * Key bindings: https://github.com/xiaoleichen/mpv-settings-mac/blob/main/input.conf
 * MPV border enabled and window controlls disabled
 * Always show dark title bar

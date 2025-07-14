@@ -16,7 +16,7 @@ function replace_options() {
   done
 }
 
-rm -rf mpv mpv_win mpv_linux
+rm -rf mpv/ mpv_win/ mpv_linux/
 
 # Use stock OSC
 if [[ "$1" == "--stock" ]]; then
@@ -30,26 +30,22 @@ if [[ "$1" == "--stock" ]]; then
   curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/input.conf -o ./mpv/input.conf
   curl -L -s https://raw.githubusercontent.com/AssrtOSS/mpv-assrt/refs/heads/master/scripts/assrt.lua -o ./mpv/scripts/assrt.lua
 
-  options=(
+  mpv_options=(
     "sub-margin-y=34:sub-margin-y=55"
-    "osd-font='DejaVu Sans':osd-font='sans-serif'"
   )
 
-  replace_options "./mpv/mpv.conf" options
+  replace_options "./mpv/mpv.conf" mpv_options
 
   echo
   echo '  Making Windows copy...'
   cp -r ./mpv/ ./mpv_win/
 
-  disable_mac_dark_title_bar_options=(
-    'macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua'
-  )
-  win_options=(
-    "sub-font='PingFang SC':sub-font='Microsoft Yahei'"
+  win_mpv_options=(
+    "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
+    "sub-font='sans-serif':sub-font='Microsoft Yahei'"
   )
 
-  replace_options "./mpv_win/mpv.conf" disable_mac_dark_title_bar_options
-  replace_options "./mpv_win/mpv.conf" win_options
+  replace_options "./mpv_win/mpv.conf" win_mpv_options
   # Additional script for Windows
   curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
 
@@ -57,13 +53,13 @@ if [[ "$1" == "--stock" ]]; then
   echo '  Making Linux copy...'
   cp -r ./mpv/ ./mpv_linux/
 
-  linux_options=(
+  linux_mpv_options=(
+    "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
     "osd-font='sans-serif':osd-font='Adwaita Sans'"
-    "sub-font='PingFang SC':sub-font='Adwaita Sans'"
+    "sub-font='sans-serif':sub-font='Adwaita Sans'"
   )
 
-  replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
-  replace_options "./mpv_linux/mpv.conf" linux_options
+  replace_options "./mpv_linux/mpv.conf" linux_mpv_options
   echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
 
   echo
@@ -87,8 +83,6 @@ curl -L -s https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thu
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.lua -o ./mpv/scripts/modernz.lua
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.conf -o ./mpv/script-opts/modernz.conf
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
-curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/PingFang-SC-Regular.ttf -o ./mpv/fonts/PingFang-SC-Regular.ttf
-curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/fonts/DejaVuSans.ttf -o ./mpv/fonts/DejaVuSans.ttf
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/material-design-icons.ttf -o ./mpv/fonts/material-design-icons.ttf
 
@@ -117,11 +111,12 @@ win_options=(
   'scalewindowed=2.0:scalewindowed=1.5'
   'scalefullscreen=2.0:scalefullscreen=1.5'
 )
-disable_mac_dark_title_bar_options=(
-  'macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua'
-)
 replace_options "./mpv_win/script-opts/modernz.conf" win_options
-replace_options "./mpv_win/mpv.conf" disable_mac_dark_title_bar_options
+win_mpv_options=(
+  "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
+  "sub-font='sans-serif':sub-font='Microsoft Yahei'"
+)
+replace_options "./mpv_win/mpv.conf" win_mpv_options
 # Additional script for Windows
 curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
 
@@ -134,6 +129,11 @@ linux_options=(
   'scalefullscreen=2.0:scalefullscreen=1.0'
 )
 replace_options "./mpv_linux/script-opts/modernz.conf" linux_options
+linux_mpv_options=(
+  "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
+  "osd-font='sans-serif':osd-font='Adwaita Sans'"
+  "sub-font='sans-serif':sub-font='Adwaita Sans'"
+)
 replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
 
