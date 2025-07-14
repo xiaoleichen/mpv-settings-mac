@@ -1,8 +1,83 @@
 #!/bin/bash
 
+function replace_options() {
+  local file=$1
+  local options_name=$2[@]
+  local options=("${!options_name}")
+  for option in "${options[@]}"; do
+    local old=`echo $option | cut -d ":" -f 1`
+    local new=`echo $option | cut -d ":" -f 2`
+    if grep -q "$old" "$file"; then
+      sed -i -e "s@$old@$new@g" "$file"
+      echo "✓" $old "===>" $new
+    else
+      echo "✘" $old not found
+    fi
+  done
+}
+
 rm -rf mpv mpv_win mpv_linux
+
+# Use stock OSC
+if [[ "$1" == "--stock" ]]; then
+
+  echo "  Gen with stock OSC"
+  mkdir -p ./mpv/scripts
+
+  echo
+  echo '  Downloading files...'
+  curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/mpv.conf -o ./mpv/mpv.conf
+  curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/input.conf -o ./mpv/input.conf
+  curl -L -s https://raw.githubusercontent.com/AssrtOSS/mpv-assrt/refs/heads/master/scripts/assrt.lua -o ./mpv/scripts/assrt.lua
+
+  options=(
+    "sub-margin-y=34:sub-margin-y=55"
+    "osd-font='DejaVu Sans':osd-font='sans-serif'"
+  )
+
+  replace_options "./mpv/mpv.conf" options
+
+  echo
+  echo '  Making Windows copy...'
+  cp -r ./mpv/ ./mpv_win/
+
+  disable_mac_dark_title_bar_options=(
+    'macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua'
+  )
+  win_options=(
+    "sub-font='PingFang SC':sub-font='Microsoft Yahei'"
+  )
+
+  replace_options "./mpv_win/mpv.conf" disable_mac_dark_title_bar_options
+  replace_options "./mpv_win/mpv.conf" win_options
+  # Additional script for Windows
+  curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
+
+  echo
+  echo '  Making Linux copy...'
+  cp -r ./mpv/ ./mpv_linux/
+
+  linux_options=(
+    "osd-font='sans-serif':osd-font='Adwaita Sans'"
+    "sub-font='PingFang SC':sub-font='Adwaita Sans'"
+  )
+
+  replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
+  replace_options "./mpv_linux/mpv.conf" linux_options
+  echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
+
+  echo
+  echo '  Done'
+
+  exit 0
+fi
+
+# Use ModernZ OSC
+
+echo "  Gen with ModernZ OSC"
 mkdir -p ./mpv/scripts ./mpv/script-opts ./mpv/fonts
 
+echo
 echo '  Downloading files...'
 curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/mpv.conf -o ./mpv/mpv.conf
 curl -L -s https://raw.githubusercontent.com/xiaoleichen/mpv-settings-mac/refs/heads/main/input.conf -o ./mpv/input.conf
@@ -17,21 +92,6 @@ curl -L -s https://github.com/xiaoleichen/mpv-settings-mac/raw/refs/heads/main/f
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/material-design-icons.ttf -o ./mpv/fonts/material-design-icons.ttf
 
-function replace_options() {
-  local file=$1
-  local options_name=$2[@]
-  local options=("${!options_name}")
-  for option in "${options[@]}"; do
-  	local old=`echo $option | cut -d ":" -f 1`
-  	local new=`echo $option | cut -d ":" -f 2`
-    if grep -q "$old" "$file"; then
-    	sed -i -e "s@$old@$new@g" "$file"
-      echo "✓" $old "===>" $new
-    else
-    	echo "✘" $old not found
-    fi
-  done
-}
 echo
 echo '  Replacing options...'
 options=(
