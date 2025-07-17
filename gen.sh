@@ -5,13 +5,12 @@ function replace_options() {
   local options_name=$2[@]
   local options=("${!options_name}")
   for option in "${options[@]}"; do
-    local old=`echo $option | cut -d ":" -f 1`
-    local new=`echo $option | cut -d ":" -f 2`
-    if grep -q "$old" "$file"; then
+    IFS=':' read -r old new <<< "$option"
+    if grep -Fq "$old" "$file"; then
       sed -i -e "s@$old@$new@g" "$file"
-      echo "✓" $old "===>" $new
+      echo "✓ $old ===> $new"
     else
-      echo "✘" $old not found
+      echo "✘ $old not found"
     fi
   done
 }
@@ -22,7 +21,10 @@ rm -rf mpv/ mpv_win/ mpv_linux/
 if [[ "$1" == "--stock" ]]; then
 
   echo "  Gen with stock OSC"
-  mkdir -p ./mpv/scripts
+  mkdir -p ./mpv/scripts ./mpv/script-opts
+
+  echo scalewindowed=0.75 >> ./mpv/script-opts/osc.conf
+  echo scalefullscreen=0.75 >> ./mpv/script-opts/osc.conf
 
   echo
   echo '  Downloading files...'
@@ -31,7 +33,7 @@ if [[ "$1" == "--stock" ]]; then
   curl -L -s https://raw.githubusercontent.com/AssrtOSS/mpv-assrt/refs/heads/master/scripts/assrt.lua -o ./mpv/scripts/assrt.lua
 
   mpv_options=(
-    "sub-margin-y=34:sub-margin-y=55"
+    "sub-margin-y=34:sub-margin-y=44"
   )
 
   replace_options "./mpv/mpv.conf" mpv_options
@@ -54,13 +56,22 @@ if [[ "$1" == "--stock" ]]; then
   cp -r ./mpv/ ./mpv_linux/
 
   linux_mpv_options=(
-    "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
+    "macos-title-bar-appearance=darkAqua:#   macos-title-bar-appearance=darkAqua"
     "osd-font='sans-serif':osd-font='Adwaita Sans'"
     "sub-font='sans-serif':sub-font='Adwaita Sans'"
   )
 
   replace_options "./mpv_linux/mpv.conf" linux_mpv_options
   echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
+
+  echo
+  echo '  Reversing mouse direction for macOS'
+
+  reverse_mouse=(
+    "WHEEL_UP    add volume 5:WHEEL_UP    add volume -5"
+    "WHEEL_DOWN  add volume -5:WHEEL_DOWN  add volume 5"
+  )
+  replace_options "./mpv/input.conf" reverse_mouse
 
   echo
   echo '  Done'
@@ -136,6 +147,15 @@ linux_mpv_options=(
 )
 replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
+
+echo
+echo '  Reversing mouse direction for macOS'
+
+reverse_mouse=(
+  "WHEEL_UP    add volume 5:WHEEL_UP    add volume -5"
+  "WHEEL_DOWN  add volume -5:WHEEL_DOWN  add volume 5"
+)
+replace_options "./mpv/input.conf" reverse_mouse
 
 echo
 echo '  Done'
