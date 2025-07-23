@@ -23,8 +23,20 @@ if [[ "$1" == "--stock" ]]; then
   echo "  Gen with stock OSC"
   mkdir -p ./mpv/scripts ./mpv/script-opts
 
-  echo scalewindowed=0.75 >> ./mpv/script-opts/osc.conf
-  echo scalefullscreen=0.75 >> ./mpv/script-opts/osc.conf
+  echo 'scalewindowed=0.75
+scalefullscreen=0.75
+boxalpha=80
+deadzonesize=0
+background_color=#000000
+timecode_color=#CCCCCC
+title_color=#CCCCCC
+time_pos_color=#FFFFFF
+time_pos_outline_color=#000000
+buttons_color=#CCCCCC
+top_buttons_color=#CCCCCC
+small_buttonsL_color=#CCCCCC
+small_buttonsR_color=#CCCCCC
+held_element_color=#777777' >> ./mpv/script-opts/osc.conf
 
   echo
   echo '  Downloading files...'
@@ -145,7 +157,7 @@ linux_mpv_options=(
   "osd-font='sans-serif':osd-font='Adwaita Sans'"
   "sub-font='sans-serif':sub-font='Adwaita Sans'"
 )
-replace_options "./mpv_linux/mpv.conf" disable_mac_dark_title_bar_options
+replace_options "./mpv_linux/mpv.conf" linux_mpv_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
 
 echo
