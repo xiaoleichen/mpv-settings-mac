@@ -25,13 +25,9 @@ if [[ "$1" == "--stock" ]]; then
 
   echo 'scalewindowed=0.75
 scalefullscreen=0.75
-boxalpha=80
 deadzonesize=0
-background_color=#000000
 timecode_color=#CCCCCC
 title_color=#CCCCCC
-time_pos_color=#FFFFFF
-time_pos_outline_color=#000000
 buttons_color=#CCCCCC
 top_buttons_color=#CCCCCC
 small_buttonsL_color=#CCCCCC
