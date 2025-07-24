@@ -110,8 +110,8 @@ echo '  Replacing options...'
 options=(
   'bottomhover=yes:bottomhover=no'
   'vidscale=auto:vidscale=no'
-  'cache_info=no:cache_info=yes'
-  'cache_info_speed=no:cache_info_speed=yes'
+  'show_title=yes:show_title=no'
+  'show_chapter_title=yes:show_chapter_title=no'
   'cache_info_font_size=12:cache_info_font_size=14'
   'window_controls=yes:window_controls=no'
   'chapter_skip_buttons=no:chapter_skip_buttons=yes'
@@ -119,6 +119,7 @@ options=(
   'hover_effect_color=#FB8C00:hover_effect_color=#FFFFFF'
   'scalewindowed=1.0:scalewindowed=2.0'
   'scalefullscreen=1.0:scalefullscreen=2.0'
+  'raise_subtitle_amount=125:raise_subtitle_amount=80'
 )
 
 replace_options "./mpv/script-opts/modernz.conf" options
