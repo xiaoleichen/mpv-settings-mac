@@ -108,18 +108,16 @@ curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/material-des
 echo
 echo '  Replacing options...'
 options=(
-  'bottomhover=yes:bottomhover=no'
+  'deadzonesize=0.75:deadzonesize=0'
   'vidscale=auto:vidscale=no'
   'show_title=yes:show_title=no'
   'show_chapter_title=yes:show_chapter_title=no'
   'cache_info_font_size=12:cache_info_font_size=14'
   'window_controls=yes:window_controls=no'
   'chapter_skip_buttons=no:chapter_skip_buttons=yes'
-  'nibbles_style=triangle:nibbles_style=single-bar'
-  'hover_effect_color=#FB8C00:hover_effect_color=#FFFFFF'
+  'hover_effect_color=#FF8232:hover_effect_color=#FFFFFF'
   'scalewindowed=1.0:scalewindowed=2.0'
   'scalefullscreen=1.0:scalefullscreen=2.0'
-  'raise_subtitle_amount=125:raise_subtitle_amount=80'
 )
 
 replace_options "./mpv/script-opts/modernz.conf" options
