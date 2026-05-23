@@ -102,8 +102,7 @@ curl -L -s https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thu
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.lua -o ./mpv/scripts/modernz.lua
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.conf -o ./mpv/script-opts/modernz.conf
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
-curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/fluent-system-icons.ttf -o ./mpv/fonts/fluent-system-icons.ttf
-curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/material-design-icons.ttf -o ./mpv/fonts/material-design-icons.ttf
+curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icons.ttf -o ./mpv/fonts/modernz-icons.ttf
 
 echo
 echo '  Replacing options...'
