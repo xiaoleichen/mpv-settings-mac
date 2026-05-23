@@ -117,6 +117,9 @@ options=(
   'hover_effect_color=#FF8232:hover_effect_color=#FFFFFF'
   'scalewindowed=1.0:scalewindowed=2.0'
   'scalefullscreen=1.0:scalefullscreen=2.0'
+  'screenshot_button=yes:screenshot_button=no'
+  'loop_button=yes:loop_button=no'
+  'speed_button=yes:speed_button=no'
 )
 
 replace_options "./mpv/script-opts/modernz.conf" options
