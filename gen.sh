@@ -111,7 +111,6 @@ options=(
   'vidscale=auto:vidscale=no'
   'show_title=yes:show_title=no'
   'show_chapter_title=yes:show_chapter_title=no'
-  'cache_info_font_size=12:cache_info_font_size=14'
   'window_controls=yes:window_controls=no'
   'chapter_skip_buttons=no:chapter_skip_buttons=yes'
   'hover_effect_color=#FF8232:hover_effect_color=#FFFFFF'
@@ -120,6 +119,9 @@ options=(
   'screenshot_button=yes:screenshot_button=no'
   'loop_button=yes:loop_button=no'
   'speed_button=yes:speed_button=no'
+  'icon_theme=fluent:icon_theme=material'
+  'seek_handle_color=#C96508:seek_handle_color=#FFFFFF'
+  'seek_handle_border_color=#FF8232:seek_handle_border_color=#FFFFFF'
 )
 
 replace_options "./mpv/script-opts/modernz.conf" options
