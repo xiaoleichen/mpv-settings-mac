@@ -103,6 +103,8 @@ curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/m
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.conf -o ./mpv/script-opts/modernz.conf
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icons.ttf -o ./mpv/fonts/modernz-icons.ttf
+curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv/scripts/open-file.lua
+curl -L -s https://raw.githubusercontent.com/Samillion/mpv-conf/refs/heads/master/menu.conf -o ./mpv/menu.conf
 
 echo
 echo '  Replacing options...'
