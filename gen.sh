@@ -58,6 +58,11 @@ held_element_color=#777777' >> ./mpv/script-opts/osc.conf
   replace_options "./mpv_win/mpv.conf" win_mpv_options
   # Additional script for Windows
   curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
+  curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv_win/scripts/open-file.lua
+  echo 'MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
+  echo 'Ctrl+o          script-binding open_file/open' >> ./mpv_win/input.conf
+  echo 'Ctrl+Shift+s    script-binding open_file/add_subtitle' >> ./mpv_win/input.conf
+  echo 'Ctrl+Shift+a    script-binding open_file/add_audio' >> ./mpv_win/input.conf
 
   echo
   echo '  Making Linux copy...'
@@ -103,8 +108,6 @@ curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/m
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/modernz.conf -o ./mpv/script-opts/modernz.conf
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/locale/modernz-locale.json -o ./mpv/script-opts/modernz-locale.json
 curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icons.ttf -o ./mpv/fonts/modernz-icons.ttf
-curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv/scripts/open-file.lua
-curl -L -s https://raw.githubusercontent.com/Samillion/mpv-conf/refs/heads/master/menu.conf -o ./mpv/menu.conf
 
 echo
 echo '  Replacing options...'
@@ -143,6 +146,9 @@ win_mpv_options=(
 replace_options "./mpv_win/mpv.conf" win_mpv_options
 # Additional script for Windows
 curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
+curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv_win/scripts/open-file.lua
+curl -L -s https://raw.githubusercontent.com/Samillion/mpv-conf/refs/heads/master/menu.conf -o ./mpv_win/menu.conf
+echo 'MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
 
 echo
 echo '  Making Linux copy...'
