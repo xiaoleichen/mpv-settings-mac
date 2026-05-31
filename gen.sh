@@ -52,14 +52,14 @@ held_element_color=#777777' >> ./mpv/script-opts/osc.conf
 
   win_mpv_options=(
     "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
-    "sub-font='sans-serif':sub-font='Microsoft Yahei'"
+    "sub-font='sans-serif':sub-font='Noto Sans SC'"
   )
 
   replace_options "./mpv_win/mpv.conf" win_mpv_options
   # Additional script for Windows
   curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
   curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv_win/scripts/open-file.lua
-  echo 'MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
+  echo 'Ctrl+MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
   echo 'Ctrl+o          script-binding open_file/open' >> ./mpv_win/input.conf
   echo 'Ctrl+Shift+s    script-binding open_file/add_subtitle' >> ./mpv_win/input.conf
   echo 'Ctrl+Shift+a    script-binding open_file/add_audio' >> ./mpv_win/input.conf
@@ -70,8 +70,6 @@ held_element_color=#777777' >> ./mpv/script-opts/osc.conf
 
   linux_mpv_options=(
     "macos-title-bar-appearance=darkAqua:#   macos-title-bar-appearance=darkAqua"
-    "osd-font='sans-serif':osd-font='Adwaita Sans'"
-    "sub-font='sans-serif':sub-font='Adwaita Sans'"
   )
 
   replace_options "./mpv_linux/mpv.conf" linux_mpv_options
@@ -112,6 +110,7 @@ curl -L -s https://github.com/Samillion/ModernZ/raw/refs/heads/main/modernz-icon
 echo
 echo '  Replacing options...'
 options=(
+  'layout=default:layout=compact'
   'deadzonesize=0.75:deadzonesize=0'
   'vidscale=auto:vidscale=no'
   'show_title=yes:show_title=no'
@@ -141,14 +140,14 @@ win_options=(
 replace_options "./mpv_win/script-opts/modernz.conf" win_options
 win_mpv_options=(
   "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
-  "sub-font='sans-serif':sub-font='Microsoft Yahei'"
+  "sub-font='sans-serif':sub-font='Noto Sans SC'"
 )
 replace_options "./mpv_win/mpv.conf" win_mpv_options
 # Additional script for Windows
 curl -L -s https://raw.githubusercontent.com/zenyd/mpv-scripts/refs/heads/master/copy-paste-URL.lua -o ./mpv_win/scripts/paste_url.lua
 curl -L -s https://raw.githubusercontent.com/Samillion/ModernZ/refs/heads/main/extras/open-file/open-file.lua -o ./mpv_win/scripts/open-file.lua
 curl -L -s https://raw.githubusercontent.com/Samillion/mpv-conf/refs/heads/master/menu.conf -o ./mpv_win/menu.conf
-echo 'MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
+echo 'Ctrl+MBTN_RIGHT  script-binding select/context-menu' >> ./mpv_win/input.conf
 
 echo
 echo '  Making Linux copy...'
@@ -161,8 +160,6 @@ linux_options=(
 replace_options "./mpv_linux/script-opts/modernz.conf" linux_options
 linux_mpv_options=(
   "macos-title-bar-appearance=darkAqua:# macos-title-bar-appearance=darkAqua"
-  "osd-font='sans-serif':osd-font='Adwaita Sans'"
-  "sub-font='sans-serif':sub-font='Adwaita Sans'"
 )
 replace_options "./mpv_linux/mpv.conf" linux_mpv_options
 echo gpu-context=x11egl >> ./mpv_linux/mpv.conf
